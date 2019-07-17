@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from paypal.standard.conf import (
     BUY_BUTTON_IMAGE, DONATION_BUTTON_IMAGE, PAYPAL_CERT, PAYPAL_CERT_ID, PAYPAL_PRIVATE_CERT, PAYPAL_PUBLIC_CERT,
-    POSTBACK_ENDPOINT, SANDBOX_POSTBACK_ENDPOINT, SUBSCRIPTION_BUTTON_IMAGE
+    API_ENDPOINT, SANDBOX_API_ENDPOINT, SUBSCRIPTION_BUTTON_IMAGE
 )
 from paypal.standard.widgets import ValueHiddenInput
 from paypal.utils import warn_untested
@@ -156,9 +156,9 @@ class PayPalPaymentsForm(forms.Form):
     def get_endpoint(self):
         "Returns the endpoint url for the form."
         if self.test_mode():
-            return SANDBOX_POSTBACK_ENDPOINT
+            return SANDBOX_API_ENDPOINT
         else:
-            return POSTBACK_ENDPOINT
+            return API_ENDPOINT
 
     def render(self):
         return format_html(u"""<form action="{0}" method="post">
